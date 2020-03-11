@@ -12,10 +12,10 @@
 ## Timeline
 
 ### Wednesday - Github: Make repo, Readme
-### Thursday - Create and update index.html, styles.css, app.js
-### Friday - update app.js with functions
-### Saturday - app.js
-### Sunday - index.html, more css
+### Thursday - Create and update index.html, styles.css, app.js -- start on (game canvas, game piece, gravity, game area, controls, collision detection, obstacles, score, game over)
+### Friday - app.js functions -- game piece, gravity, game area, controls
+### Saturday - app.js functions -- collision detection, obstacles, score, game over
+### Sunday - index.html, more css 
 ### Monday - Finalize Game
-### Tuesday - Presentation
+### Tuesday - Presentation/ Finalize Game
 
