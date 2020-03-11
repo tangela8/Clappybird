@@ -7,7 +7,7 @@
 
 ## Wireframe
 
-![alt text](https://giphy.com/gifs/flappy-bird-flappybird-gqcYcUPvKg3fi "Clappy Bird")
+![alt text](https://66.media.tumblr.com/d1dd55cfd8be80b6e8c94df5b2b5df13/tumblr_n2coyqswGm1qm7cjco1_500.gifv "Clappy Bird")
 
 ## Timeline
 
