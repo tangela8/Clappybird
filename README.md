@@ -14,8 +14,8 @@
 ### Wednesday - Github: Make repo, Readme
 ### Thursday - Create and update index.html, styles.css, app.js
 ### Friday - update app.js with functions
-### Saturday - 
-### Sunday -
-### Monday -
-### Tuesday -
+### Saturday - app.js
+### Sunday - index.html, more css
+### Monday - Finalize Game
+### Tuesday - Presentation
 
