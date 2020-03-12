@@ -1,6 +1,6 @@
 //global variables:
 let myGamePiece;// box first then change to bird
-let myObstacles = [];
+let pipes = [];
 let myScore = 0;
 
 //create the canvas for the game
@@ -69,15 +69,15 @@ function bird(width, height, color, x, y, type) {
             this.gravitySpeed = 0;
         }
     }
-    this.crashWith = function(pipes) {
+    this.crashWith = function(obstacles) {
         let myleft = this.x;
         let myright = this.x + (this.width);
         let mytop = this.y;
         let mybottom = this.y + (this.height);
-        let otherleft = pipes.x;
-        let otherright = pipes.x + (pipes.width);
-        let othertop = pipes.y;
-        let otherbottom = pipes.y + (pipes.height);
+        let otherleft = obstacles.x;
+        let otherright = obstacles.x + (obstacles.width);
+        let othertop = obstacles.y;
+        let otherbottom = obstacles.y + (obstacles.height);
         let crash = true;
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
@@ -87,8 +87,13 @@ function bird(width, height, color, x, y, type) {
 }
 
 //game controls
+
+// function up(n) {
+//     myGamePiece.gravity = n;
+// }
 function moveUp() {
     myGamePiece.speedY = -2; 
+    
 }
 
 function moveDown() {
@@ -110,13 +115,14 @@ function updateGameArea() {
     myGamePiece.newPos();
     myGamePiece.update();
     let x, height, gap, minHeight, maxHeight, minGap, maxGap;
-    for (i = 0; i < myObstacles.length; i += 1) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
+    for (i = 0; i < pipes.length; i += 1) {
+        if (myGamePiece.crashWith(pipes[i])) {
             return;
         } 
     }
     gameCanvas.clear();
     gameCanvas.frameNo += 1;
+    //conditions for the pipes
     if (gameCanvas.frameNo == 1 || everyinterval(200)) {
         x = gameCanvas.canvas.width;
         minHeight = 20;
@@ -125,12 +131,12 @@ function updateGameArea() {
         minGap = 100;
         maxGap = 200;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new bird(30, height, "green", x, 0));
-        myObstacles.push(new bird(30, x - height - gap, "green", x, height + gap));
+        pipes.push(new bird(30, height, "green", x, 0));
+        pipes.push(new bird(30, x - height - gap, "green", x, height + gap));
     }
-    for (i = 0; i < myObstacles.length; i += 1) {
-        myObstacles[i].x += -1;
-        myObstacles[i].update();
+    for (i = 0; i < pipes.length; i += 1) {
+        pipes[i].x += -1;
+        pipes[i].update();
     }
     myScore.text="SCORE: " + gameCanvas.frameNo;
     myScore.update();
@@ -140,7 +146,4 @@ function updateGameArea() {
 
 
 
-// function up(n) {
-//     myGamePiece.gravity = n;
-// }
 
