@@ -1,6 +1,10 @@
 canvas {
     border: none;
-    background-color:whitesmoke;
+    background-image:url("skyBackground.jpg");
+    width: auto;
+    height: auto;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .button{
