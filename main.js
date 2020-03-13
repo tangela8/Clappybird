@@ -14,6 +14,7 @@ const gameCanvas = {
         this.frameNo = 0;
         //setting the speed of the pipes
         this.interval = setInterval(updateGameArea, 20);
+        //for the buttons
         window.addEventListener("keydown", function (moveUp) {
             gameCanvas.key = moveUp.keyCode;
         })
@@ -105,10 +106,10 @@ function bird(width, height, color, x, y, type) {
 
 //game controls
 
-// function clearMove() {
-//     myGamePiece.speedX = 0; 
-//     myGamePiece.speedY = 0; 
-// }
+function clearMove() {
+    myGamePiece.speedX = 0; //to not fly right
+    myGamePiece.speedY = 0; //to not fly up and down
+}
 //setting the distance between the pipes
 function everyInterval(n) {
     if ((gameCanvas.frameNo / n) % 1 == 0) {return true;}
@@ -117,16 +118,19 @@ function everyInterval(n) {
 
 //putting movements and obstacles into game area
 function updateGameArea() {
+    //let action = prompt("You lose", "Want to play again? ");
     let x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < pipes.length; i += 1) {
         if (myGamePiece.crashWith(pipes[i])) {
-            return;
+            return action; 
         } 
     }
     gameCanvas.clear();//must clear from last frame, if left out will leave traces
-    myGamePiece.speedY = 0;
+    clearMove();
+    // myGamePiece.speedX = 0; 
+    // myGamePiece.speedY = 0; 
     if (gameCanvas.key && gameCanvas.key == 38) {myGamePiece.speedY = -1;}
-    //if (gameCanvas.key && gameCanvas.key == 39) {myGamePiece.speedX = 1;}
+    if (gameCanvas.key && gameCanvas.key == 39) {myGamePiece.speedX = 1;}
     if (gameCanvas.key && gameCanvas.key == 40) {myGamePiece.speedY = 1;}
     gameCanvas.frameNo += 1;//making it move
     //conditions for the pipes
