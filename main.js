@@ -1,3 +1,5 @@
+//prompt("Are you ready? ", "type yes");
+
 //global variables:
 let myGamePiece;// box first then change to bird
 let pipes = [];
@@ -29,16 +31,23 @@ const gameCanvas = {
 
 // start game
 function startGame() {
-    myGamePiece = new bird(80, 80, "Dumbo-gif.gif", 10, 120, "image");
-    myGamePiece.gravity = 0.05;
+    myGamePiece = new bird(80, 80, "bird.gif", 10, 120, "image");
+    //myGamePiece.gravity = 0.05;
     myScore = new bird("10px", "Consolas", "black", 280, 40, "text");
     gameCanvas.start();
 }
 
+//score function
+// function score(){
+//     let myScore = 0;
+//     delay xx ms;
+//     setInterval =;
+// }
 //Game piece: make a square for now and input image later on
 function bird(width, height, color, x, y, type) {
     this.type = type;
     if(type == "image"){
+        // ctx.font = this.width + " " + this.height;
         this.image = new Image();
         this.image.src = color;
     }
@@ -54,6 +63,7 @@ function bird(width, height, color, x, y, type) {
     this.update = function() {
         ctx = gameCanvas.context;
         if (this.type == "image") {
+            // ctx.font = this.width + " " + this.height;
             ctx.drawImage(this.image,
                 this.x,
                 this.y,
@@ -68,7 +78,7 @@ function bird(width, height, color, x, y, type) {
         this.x += this.speedX;
         this.y += this.speedY //+ this.gravitySpeed;
         this.hitBottom();
-        //this.hitTop();
+        this.hitTop();
     }
     //stop the falling when it hits the bottom of the game area
     this.hitBottom = function() {
@@ -79,12 +89,8 @@ function bird(width, height, color, x, y, type) {
         }
     }
     this.hitTop = function() {
-        let rockTop = gameCanvas.canvas.height - this.height;
-        // if (this.y < rockTop) {
-        //     this.y = rockTop;
-        //     this.height = 0;
-        if (this.y - this.height < 0) {
-            this.y = this.height;
+        if (this.y < 0) {
+            this.y = 0;
         }
     }
     this.crashWith = function(obstacles) {
@@ -118,7 +124,10 @@ function everyInterval(n) {
 
 //putting movements and obstacles into game area
 function updateGameArea() {
-    //let action = prompt("You lose", "Want to play again? ");
+    // let action = prompt("You lose", "Want to play again? ");
+    // while (action.toLowerCase() = "yes"){
+    //     startGame();
+    // }
     let x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < pipes.length; i += 1) {
         if (myGamePiece.crashWith(pipes[i])) {
@@ -126,7 +135,7 @@ function updateGameArea() {
         } 
     }
     gameCanvas.clear();//must clear from last frame, if left out will leave traces
-    clearMove();
+    clearMove();// must reset every click
     // myGamePiece.speedX = 0; 
     // myGamePiece.speedY = 0; 
     if (gameCanvas.key && gameCanvas.key == 38) {myGamePiece.speedY = -1;}
@@ -155,6 +164,6 @@ function updateGameArea() {
     myGamePiece.update();
 }
 
-
+document.getElementById("score").innerHTML=myScore;
 
 

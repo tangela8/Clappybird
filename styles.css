@@ -1,5 +1,5 @@
 canvas {
-    border: none;
+    border: solid orange 1px;
     background-image:url("skyBackground.jpg");
     width: auto;
     height: auto;
@@ -7,3 +7,7 @@ canvas {
     background-size: contain;
 }
 
+.score-container {
+    border: solid red 1px;
+    width: min-content;
+}
