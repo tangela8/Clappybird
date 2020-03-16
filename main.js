@@ -34,15 +34,23 @@ function startGame() {
     myGamePiece = new bird(80, 80, "bird.gif", 10, 120, "image");
     //myGamePiece.gravity = 0.05;
     myScore = new bird("10px", "Consolas", "black", 280, 40, "text");
+    //alert("Start Game");
     gameCanvas.start();
 }
 
-//score function
-// function score(){
-//     let myScore = 0;
-//     delay xx ms;
-//     setInterval =;
-// }
+// score function
+function score(){
+    //delay xx ms;
+    
+    // for (let myScore = 0; myScore < 10; myScore++){
+
+    //     console.log(myScore);
+    // }
+
+    //everyInterval(200) = ;
+}
+
+document.getElementById("score").innerHTML = myScore;
 //Game piece: make a square for now and input image later on
 function bird(width, height, color, x, y, type) {
     this.type = type;
@@ -124,23 +132,34 @@ function everyInterval(n) {
 
 //putting movements and obstacles into game area
 function updateGameArea() {
-    // let action = prompt("You lose", "Want to play again? ");
-    // while (action.toLowerCase() = "yes"){
-    //     startGame();
+    // let action = prompt("Want to play again?, type yes")
+    
     // }
     let x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < pipes.length; i += 1) {
         if (myGamePiece.crashWith(pipes[i])) {
-            return action; 
+            //pipes = 0;
+            let action = prompt("Want to play again?, type yes");
+            console.log(action);
+            if (action.toLowerCase() === "yes") {
+                // console.log("if statement works");
+                startGame();
+                location.reload();
+            } else {
+                window.close();
+            }
+            return action; //startGame();
+            
         } 
     }
+    
     gameCanvas.clear();//must clear from last frame, if left out will leave traces
     clearMove();// must reset every click
     // myGamePiece.speedX = 0; 
     // myGamePiece.speedY = 0; 
-    if (gameCanvas.key && gameCanvas.key == 38) {myGamePiece.speedY = -1;}
-    if (gameCanvas.key && gameCanvas.key == 39) {myGamePiece.speedX = 1;}
-    if (gameCanvas.key && gameCanvas.key == 40) {myGamePiece.speedY = 1;}
+    if (gameCanvas.key && gameCanvas.key == 38) {myGamePiece.speedY = -2;}
+    if (gameCanvas.key && gameCanvas.key == 39) {myGamePiece.speedX = 5;}
+    if (gameCanvas.key && gameCanvas.key == 40) {myGamePiece.speedY = 2;}
     gameCanvas.frameNo += 1;//making it move
     //conditions for the pipes
     if (gameCanvas.frameNo == 1 || everyInterval(200)) {
@@ -154,16 +173,21 @@ function updateGameArea() {
         pipes.push(new bird(30, height, "green", x, 0));
         pipes.push(new bird(30, x - height - gap, "green", x, height + gap));
     }
-    for (i = 0; i < pipes.length; i += 1) {
+    for (let i = 0; i < pipes.length; i += 1) {
         pipes[i].x += -1;//making the pipes move
         pipes[i].update();
+        // if(pipes[i].x == 5){
+        //     myScore++;
+        // }
     }
+    //score += 1;
     myScore.text="SCORE: " + gameCanvas.frameNo;
+    //Math.floor(myGameArea.frameNo/450)
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
 }
 
-document.getElementById("score").innerHTML=myScore;
+
 
 
