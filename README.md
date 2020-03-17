@@ -3,7 +3,7 @@
 
 # Overview and Instructions:
 
-### Clappy Bird is a side-scrolling game featuring 2D style graphics. The objective was to direct a flying bird, named "Clappy", who moves continuously to the right, between sets of pipes. If the player touches the pipes, they lose. Clappy briefly flaps upward each time that the player taps the "UP" button; if the button is not pressed, Clappy falls due to gravity; each pipe the player navigates between earns the player 2 points. In order to win the game, the player must reach 10 points.
+### Clappy Bird is a side-scrolling game featuring 2D style graphics. The objective was to direct a flying bird, named "Clappy", who moves continuously to the right, between sets of pipes. If the player touches the pipes, they lose. Clappy briefly flaps upward each time that the player press the "UP" button, flaps downwards if the player press the "DOWN" button. In order to win the game, the player must fly pass 5 pipes.
 
 ## Wireframe
 

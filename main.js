@@ -1,4 +1,4 @@
-//prompt("Are you ready? ", "type yes");
+alert("Are you ready? If you make it pass 5 pipes, you win!");
 
 //global variables:
 let myGamePiece;// box first then change to bird
@@ -9,8 +9,8 @@ let pipes = [];
 const gameCanvas = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 800;//drawing the game area
-        this.canvas.height = 800;//drawing the game area
+        this.canvas.width = 1300;//draw the game area
+        this.canvas.height = 700;//draw the game area
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -31,9 +31,9 @@ const gameCanvas = {
 
 // start game
 function startGame() {
-    myGamePiece = new bird(80, 80, "birdie.gif", 10, 120, "image");
+    myGamePiece = new bird(120, 120, "birdie.gif", 10, 120, "image");
     //myGamePiece.gravity = 0.05;
-    myScore = new bird("10px", "Consolas", "black", 280, 40, "text");
+    //myScore = new bird("10px", "Consolas", "black", 280, 40, "text");
     //alert("Start Game");
     gameCanvas.start();
     //score();
@@ -67,7 +67,7 @@ function bird(width, height, color, x, y, type) {
         this.image = new Image();
         this.image.src = color;
     }
-    this.score = 0;
+    //this.score = 0;
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -77,7 +77,7 @@ function bird(width, height, color, x, y, type) {
     //this.gravity = 0;
     //this.gravitySpeed = 0;
     this.update = function() {
-        ctx = gameCanvas.context;
+        ctx = gameCanvas.context;//put the image into the box to display it
         if (this.type == "image") {
             ctx.drawImage(this.image,
                 this.x,
@@ -89,7 +89,7 @@ function bird(width, height, color, x, y, type) {
         }
     }
     this.newPos = function() {
-        this.gravitySpeed += this.gravity;
+        //this.gravitySpeed += this.gravity;
         this.x += this.speedX;
         this.y += this.speedY //+ this.gravitySpeed;
         this.hitBottom();
@@ -185,16 +185,9 @@ function updateGameArea() {
         pipes[i].update();
         if(pipes[i].x == 5){
             let win = alert("Congraulations, You Won!!! Click OK twice to reload the game. ");
-            //console.log(win);
-        //     if (action.toLowerCase() === "yes") {
-        //         // console.log("if statement works");
-        //         startGame();
-        //         location.reload();
-        // } else {
-        //     window.close();
-        // } return;
+
         return location.reload();
-    }
+        }
     }
     //score += 1;
     //myScore.text="SCORE: " + gameCanvas.frameNo;

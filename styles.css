@@ -6,7 +6,7 @@ canvas {
     background-size: cover;
 }
 
-.title {
+.score-container {
     border: none;
     width: min-content;
     z-index: auto;
