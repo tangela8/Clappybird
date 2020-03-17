@@ -3,14 +3,14 @@
 //global variables:
 let myGamePiece;// box first then change to bird
 let pipes = [];
-let myScore = 0;
+//let myScore = score();
 
 //create the canvas for the game
 const gameCanvas = {
     canvas : document.createElement("canvas"),
     start : function() {
         this.canvas.width = 800;//drawing the game area
-        this.canvas.height = 500;//drawing the game area
+        this.canvas.height = 800;//drawing the game area
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -31,15 +31,17 @@ const gameCanvas = {
 
 // start game
 function startGame() {
-    myGamePiece = new bird(80, 80, "bird.gif", 10, 120, "image");
+    myGamePiece = new bird(80, 80, "birdie.gif", 10, 120, "image");
     //myGamePiece.gravity = 0.05;
     myScore = new bird("10px", "Consolas", "black", 280, 40, "text");
     //alert("Start Game");
     gameCanvas.start();
+    //score();
+    
 }
 
 // score function
-function score(){
+// function score(){
     //delay xx ms;
     
     // for (let myScore = 0; myScore < 10; myScore++){
@@ -48,14 +50,20 @@ function score(){
     // }
 
     //everyInterval(200) = ;
-}
+//         let date = new Date();
+//         let s = date.getSeconds();
+//         console.log(`${s}`);
+//       }
+//       setInterval(() => {
+//         score();
+//       }, 1000);
+// console.log(setInterval());
 
-document.getElementById("score").innerHTML = myScore;
+//document.getElementById("score").innerHTML = myScore;
 //Game piece: make a square for now and input image later on
 function bird(width, height, color, x, y, type) {
     this.type = type;
     if(type == "image"){
-        // ctx.font = this.width + " " + this.height;
         this.image = new Image();
         this.image.src = color;
     }
@@ -66,12 +74,11 @@ function bird(width, height, color, x, y, type) {
     this.speedY = 0;    
     this.x = x;
     this.y = y;
-    this.gravity = 0;
-    this.gravitySpeed = 0;
+    //this.gravity = 0;
+    //this.gravitySpeed = 0;
     this.update = function() {
         ctx = gameCanvas.context;
         if (this.type == "image") {
-            // ctx.font = this.width + " " + this.height;
             ctx.drawImage(this.image,
                 this.x,
                 this.y,
@@ -96,11 +103,13 @@ function bird(width, height, color, x, y, type) {
             //this.gravitySpeed = 0;
         }
     }
+    //stop flying out of canvas
     this.hitTop = function() {
         if (this.y < 0) {
             this.y = 0;
         }
     }
+    //crash conditions
     this.crashWith = function(obstacles) {
         let myleft = this.x;
         let myright = this.x + (this.width);
@@ -132,14 +141,12 @@ function everyInterval(n) {
 
 //putting movements and obstacles into game area
 function updateGameArea() {
-    // let action = prompt("Want to play again?, type yes")
-    
-    // }
+
     let x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < pipes.length; i += 1) {
         if (myGamePiece.crashWith(pipes[i])) {
             //pipes = 0;
-            let action = prompt("Want to play again?, type yes");
+            let action = prompt("Want to play again?, type yes, if not type no to exit");
             console.log(action);
             if (action.toLowerCase() === "yes") {
                 // console.log("if statement works");
@@ -156,34 +163,43 @@ function updateGameArea() {
     gameCanvas.clear();//must clear from last frame, if left out will leave traces
     clearMove();// must reset every click
     // myGamePiece.speedX = 0; 
-    // myGamePiece.speedY = 0; 
-    if (gameCanvas.key && gameCanvas.key == 38) {myGamePiece.speedY = -2;}
+    // myGamePiece.speedY = 0; //can make a function instead
+    if (gameCanvas.key && gameCanvas.key == 38) {myGamePiece.speedY = -5;}
     if (gameCanvas.key && gameCanvas.key == 39) {myGamePiece.speedX = 5;}
-    if (gameCanvas.key && gameCanvas.key == 40) {myGamePiece.speedY = 2;}
+    if (gameCanvas.key && gameCanvas.key == 40) {myGamePiece.speedY = 5;}
     gameCanvas.frameNo += 1;//making it move
     //conditions for the pipes
     if (gameCanvas.frameNo == 1 || everyInterval(200)) {
         x = gameCanvas.canvas.width;
-        minHeight = 20;
-        maxHeight = 200;
-        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 100;
-        maxGap = 200;
-        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        minHeight = 100;//height from top
+        maxHeight = 200;//height from bottom
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);//random height
+        minGap = 200;// set the gaps 
+        maxGap = 300;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);//to make random gaps
         pipes.push(new bird(30, height, "green", x, 0));
         pipes.push(new bird(30, x - height - gap, "green", x, height + gap));
     }
     for (let i = 0; i < pipes.length; i += 1) {
         pipes[i].x += -1;//making the pipes move
         pipes[i].update();
-        // if(pipes[i].x == 5){
-        //     myScore++;
-        // }
+        if(pipes[i].x == 5){
+            let win = alert("Congraulations, You Won!!! Click OK twice to reload the game. ");
+            //console.log(win);
+        //     if (action.toLowerCase() === "yes") {
+        //         // console.log("if statement works");
+        //         startGame();
+        //         location.reload();
+        // } else {
+        //     window.close();
+        // } return;
+        return location.reload();
+    }
     }
     //score += 1;
-    myScore.text="SCORE: " + gameCanvas.frameNo;
+    //myScore.text="SCORE: " + gameCanvas.frameNo;
     //Math.floor(myGameArea.frameNo/450)
-    myScore.update();
+    //myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
 }

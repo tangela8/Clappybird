@@ -1,13 +1,12 @@
 canvas {
-    border: solid orange 1px;
-    background-image:url("skyBackground.jpg");
+    border: none;
+    background-image:url("https://media2.giphy.com/media/BFHj2VF4vi3GE/giphy.gif");
     width: auto;
     height: auto;
-    background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
 }
 
-.score-container {
+.title {
     border: none;
     width: min-content;
     z-index: auto;
