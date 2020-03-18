@@ -9,8 +9,12 @@ let pipes = [];
 const gameCanvas = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 1300;//draw the game area
-        this.canvas.height = 700;//draw the game area
+        //this.canvas.width = 1300;//draw the game area
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        //this.canvas.width = document.body.clientWidth;
+        //this.canvas.width = document.body.clientHeight;
+        //this.canvas.height = 700;//draw the game area
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;

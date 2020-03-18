@@ -20,3 +20,7 @@ canvas {
     height: 7em;
     opacity: 0.9;
 }
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
